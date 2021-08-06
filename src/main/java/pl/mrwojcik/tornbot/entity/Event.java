@@ -1,7 +1,5 @@
 package pl.mrwojcik.tornbot.entity;
-import javax.persistence.*;
 import java.time.Instant;
-import java.util.Date;
 
 public class Event {
 

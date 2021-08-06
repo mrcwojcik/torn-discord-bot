@@ -1,24 +1,21 @@
 package pl.mrwojcik.tornbot.commands;
 
 import discord4j.core.event.domain.message.MessageCreateEvent;
-import discord4j.core.object.entity.Role;
-import discord4j.core.object.entity.User;
 import org.springframework.stereotype.Service;
 import pl.mrwojcik.tornbot.entity.Member;
-import pl.mrwojcik.tornbot.repositories.MemberRepository;
-import reactor.core.publisher.Flux;
+import pl.mrwojcik.tornbot.utils.RequestToApi;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class YeetListCommand implements Command {
 
-    private final MemberRepository memberRepository;
+    private final RequestToApi requestToApi;
 
-    public YeetListCommand(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
+    public YeetListCommand(RequestToApi requestToApi) {
+        this.requestToApi = requestToApi;
     }
 
     @Override
@@ -28,7 +25,7 @@ public class YeetListCommand implements Command {
 
     @Override
     public Mono<Void> execute(List<String> args, MessageCreateEvent event) {
-        List<Member> membersToYeet = memberRepository.findAllByYeetIsTrue();
+        List<Member> membersToYeet = requestToApi.getYeetList();
         discord4j.core.object.entity.Member member = event.getMember().orElse(null);
 
         if (membersToYeet.isEmpty()){

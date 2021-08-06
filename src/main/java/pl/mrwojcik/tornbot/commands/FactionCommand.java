@@ -5,7 +5,7 @@ import discord4j.core.spec.EmbedCreateSpec;
 import discord4j.rest.util.Color;
 import org.springframework.stereotype.Service;
 import pl.mrwojcik.tornbot.entity.Faction;
-import pl.mrwojcik.tornbot.repositories.FactionRepository;
+import pl.mrwojcik.tornbot.utils.RequestToApi;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
@@ -14,10 +14,10 @@ import java.util.function.Consumer;
 @Service
 public class FactionCommand implements Command{
 
-    private final FactionRepository factionRepository;
+    private final RequestToApi requestToApi;
 
-    public FactionCommand(FactionRepository factionRepository) {
-        this.factionRepository = factionRepository;
+    public FactionCommand(RequestToApi requestToApi) {
+        this.requestToApi = requestToApi;
     }
 
     @Override
@@ -27,8 +27,7 @@ public class FactionCommand implements Command{
 
     @Override
     public Mono<Void> execute(List<String> args, MessageCreateEvent event) {
-        Faction faction = factionRepository.findFirstByOrderByAge();
-        System.out.println(faction.getName());
+        Faction faction = requestToApi.getFactionInfo();
         Consumer<EmbedCreateSpec> embed = embedCreateSpec -> {
             embedCreateSpec.setTitle(faction.getName());
             embedCreateSpec.setColor(Color.BLUE);

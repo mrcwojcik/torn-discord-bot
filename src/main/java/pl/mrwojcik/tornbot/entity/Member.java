@@ -1,19 +1,13 @@
 package pl.mrwojcik.tornbot.entity;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 
-@Entity
-@Table(name = "members")
-@Embeddable
 public class Member implements Serializable {
 
-    @Id
-    @Column(unique = true)
     private Integer tornId;
     private String username;
     private Integer rpForFaction;

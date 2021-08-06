@@ -1,16 +1,8 @@
 package pl.mrwojcik.tornbot.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "faction")
 public class Faction {
 
-    @Id
-    @Column(unique = true)
     private String torn_id;
     private String name;
     private String respect;
