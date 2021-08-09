@@ -14,6 +14,23 @@
     <name>tornbot</name>
     <description>Demo project for Spring Boot</description>
     <packaging>jar</packaging>
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <activatedProperties>dev</activatedProperties>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <activatedProperties>prod</activatedProperties>
+            </properties>
+        </profile>
+    </profiles>
     <properties>
         <java.version>11</java.version>
     </properties>
